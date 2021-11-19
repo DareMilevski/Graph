@@ -2,7 +2,7 @@ import "./App.css";
 import "antd/dist/antd.css";
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { LAUNCHES_QUERY } from "./query/query";
+import { AllData, Category, subCategory } from "./query/query";
 import "antd/dist/antd.css";
 import Navbar from "./components/Navbar";
 import ItemList from "./components/ItemList";
@@ -15,13 +15,17 @@ import logo from "./img/icon-pabau-blue.png";
 const { Footer } = Layout;
 
 const App = () => {
-  const { data } = useQuery(LAUNCHES_QUERY);
+  const { data } = useQuery(AllData);
+  const { category } = useQuery(Category);
+  const { subcategory } = useQuery(subCategory);
+  console.log(category);
+  console.log(subcategory);
+
   const [originalData, setOriginalData] = useState();
   useEffect(() => {
     data && setOriginalData(data.data_master_categories);
   }, [data]);
 
-  console.log(originalData);
   const getSubCategories = (categories) => {
     let out = [];
     if (categories) {
@@ -34,6 +38,7 @@ const App = () => {
     return out;
   };
 
+  console.log(getSubCategories());
 
   const getAllCategories = () => {
     let out = [];
@@ -51,7 +56,6 @@ const App = () => {
     return out;
   };
 
-
   const getAllMainCategories = () => {
     let out = [];
     if (!data) {
@@ -62,8 +66,6 @@ const App = () => {
     }
     return out;
   };
-
-
 
   const [dataArr, setData] = useState(getAllMainCategories());
   const [items, setItems] = useState(getSubCategories());

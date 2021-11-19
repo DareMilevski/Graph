@@ -10,7 +10,7 @@ const ItemList = ({ setData, defaultItems }) => {
         {
           active: true,
           categories: defaultItems,
-          icon:'Spa',
+          icon: "Spa",
           id: 0,
           name: "All",
         },
@@ -18,7 +18,7 @@ const ItemList = ({ setData, defaultItems }) => {
         {
           active: false,
           categories: defaultItems,
-          icon:"Facial",
+          icon: "Facial",
           id: defaultItems.length + 1,
           name: "Vouchers",
         },
@@ -27,7 +27,7 @@ const ItemList = ({ setData, defaultItems }) => {
   }, [defaultItems]);
 
   const handleOnClick = (category, index) => {
-    console.log(category)
+    console.log(category);
     setData(category);
     setActive(index);
   };
