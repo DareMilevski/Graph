@@ -10,16 +10,16 @@ const ItemList = ({ setData, defaultItems }) => {
         {
           active: true,
           categories: defaultItems,
-          // icon: "/static/media/injection.180f69bf.svg",
-          key: 0,
+          icon:'Spa',
+          id: 0,
           name: "All",
         },
         ...defaultItems,
         {
           active: false,
           categories: defaultItems,
-          // icon: "/static/media/injection.180f69bf.svg",
-          key: defaultItems.length + 1,
+          icon:"Facial",
+          id: defaultItems.length + 1,
           name: "Vouchers",
         },
       ]);
@@ -27,10 +27,11 @@ const ItemList = ({ setData, defaultItems }) => {
   }, [defaultItems]);
 
   const handleOnClick = (category, index) => {
+    console.log(category)
     setData(category);
     setActive(index);
   };
-  console.log(handleOnClick)
+  // console.log(handleOnClick);
 
   return (
     <div className="item-list">
@@ -42,13 +43,14 @@ const ItemList = ({ setData, defaultItems }) => {
             className={active === index ? "active" : "inner"}
           >
             <div>
-              <img  alt="image" />
+              <img
+                alt={el.icon}
+                src={require(`../assets/${el.icon}.svg`).default}
+              />
             </div>
             <p>{el.name}</p>
-         
           </div>
         ))}
-        
     </div>
   );
 };
