@@ -26,49 +26,49 @@ const App = () => {
     data && setOriginalData(data.data_master_categories);
   }, [data]);
 
-  const getSubCategories = (categories) => {
-    let out = [];
-    if (categories) {
-      for (let i = 0; i < categories.length; i++) {
-        out = [...out, ...categories[i].sub_categories];
-      }
-    } else {
-      out = originalData && originalData[0].categories[0].sub_categories;
-    }
-    return out;
-  };
+  // const getSubCategories = (categories) => {
+  //   let out = [];
+  //   if (categories) {
+  //     for (let i = 0; i < categories.length; i++) {
+  //       out = [...out, ...categories[i].sub_categories];
+  //     }
+  //   } else {
+  //     out = originalData && originalData[0].categories[0].sub_categories;
+  //   }
+  //   return out;
+  // };
 
-  console.log(getSubCategories());
+  // console.log(getSubCategories());
 
-  const getAllCategories = () => {
-    let out = [];
-    if (!data) {
-      return out;
-    }
-    for (let i = 0; i < originalData && originalData.length; i++) {
-      for (let j = 0; j < originalData && originalData.categories.length; j++) {
-        out = [
-          ...out,
-          ...(data && data.originalData[i].categories[j].data_sub_categories),
-        ];
-      }
-    }
-    return out;
-  };
+  // const getAllCategories = () => {
+  //   let out = [];
+  //   if (!data) {
+  //     return out;
+  //   }
+  //   for (let i = 0; i < originalData && originalData.length; i++) {
+  //     for (let j = 0; j < originalData && originalData.categories.length; j++) {
+  //       out = [
+  //         ...out,
+  //         ...(data && data.originalData[i].categories[j].data_sub_categories),
+  //       ];
+  //     }
+  //   }
+  //   return out;
+  // };
 
-  const getAllMainCategories = () => {
-    let out = [];
-    if (!data) {
-      return out;
-    }
-    for (let i = 0; i < originalData && originalData.length; i++) {
-      out = [...out, ...(originalData && originalData[i].categories)];
-    }
-    return out;
-  };
+  // const getAllMainCategories = () => {
+  //   let out = [];
+  //   if (!data) {
+  //     return out;
+  //   }
+  //   for (let i = 0; i < originalData && originalData.length; i++) {
+  //     out = [...out, ...(originalData && originalData[i].categories)];
+  //   }
+  //   return out;
+  // };
 
-  const [dataArr, setData] = useState(getAllMainCategories());
-  const [items, setItems] = useState(getSubCategories());
+  const [dataArr, setData] = useState(category);
+  const [items, setItems] = useState(subcategory);
 
   return (
     <div className="App">
