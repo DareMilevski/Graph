@@ -1,0 +1,29 @@
+.modal {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+div {
+  text-align: center;
+}
+
+.notification {
+  color: white;
+  height: 200px;
+  width: 300px;
+  margin: auto;
+  text-align: justify;
+  padding: 10px 10px 10px 10px;
+  background-color: #086972;
+}
+
+.loading-msg {
+  color: #086972;
+  font: bold;
+}
+
+.form {
+  margin: auto;
+  text-align: left;
+  background-color: #a2d5f2;
+}

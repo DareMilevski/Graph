@@ -31,7 +31,6 @@ const ItemList = ({ setData, defaultItems }) => {
     setData(category);
     setActive(index);
   };
-  // console.log(handleOnClick);
 
   return (
     <div className="item-list">
