@@ -5,6 +5,7 @@ import "../modal.css";
 import { Category, AllData, AddService } from "../query/query";
 import gql from "graphql-tag";
 import { dataInput } from "./dataInput";
+import ShowNewService from "../components/ShowNewService";
 
 const ModalComp = () => {
   const [allData, setAllData] = useState({
@@ -87,6 +88,7 @@ const ModalComp = () => {
         onCancel={handleCancel}
         onOk={onFinish}
       >
+        {/* <ShowNewService allData={allData} /> */}
         <Form
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 14 }}
