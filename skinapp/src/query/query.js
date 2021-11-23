@@ -51,23 +51,14 @@ export const subCategory = gql`
 `;
 
 export const AddService = gql`
-mutation AddService($category_id: Int, $name: String, $price: Int, $review: Int, $rating:Int, $time:Int) {
-  insert_data_sub_categories(objects: {
-    category_id: $category_id,
-    name: $name, 
-    price: $price, 
-    review: $review, 
-    rating: $rating, 
-    time: $time}) {
-    returning {
-      id
-      category_id
-      name
-      price
-      rating
-      review
-      time
-    }
+mutation AddService($category_id: Int, $name: String, $price: Int, $review: Int, $rating: Int, $time: Int) {
+  insert_data_sub_categories_one(object: {category_id: $category_id, name: $name, price: $price, review: $review, rating: $rating, time: $time}) {
+    category_id
+    name
+    price
+    rating
+    review
+    time
   }
 }
 `;

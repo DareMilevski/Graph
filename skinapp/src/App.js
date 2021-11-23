@@ -14,14 +14,12 @@ import { Layout } from "antd";
 
 import logo from "./img/icon-pabau-blue.png";
 
-
 const { Footer } = Layout;
 
 const App = () => {
   const { data } = useQuery(AllData);
   const { category } = useQuery(Category);
   const { subcategory } = useQuery(subCategory);
-
 
   const [originalData, setOriginalData] = useState();
 
@@ -35,9 +33,7 @@ const App = () => {
   return (
     <div className="App">
       <Navbar />
-      <ModalComp 
-      originalData={originalData}
-       />
+      <ModalComp originalData={originalData} subcategory={subcategory} />
       <ItemList setData={setData} defaultItems={originalData} />
       <div className="main">
         <SelectList data={dataArr} setItems={setItems} />
