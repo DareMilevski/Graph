@@ -4,6 +4,7 @@ import { Form, Input, Button, Modal, Select } from "antd";
 import "../modal.css";
 import { Category, AllData, AddService } from "../query/query";
 import gql from "graphql-tag";
+import { dataInput } from "./dataInput";
 
 const ModalComp = () => {
   const [allData, setAllData] = useState({
@@ -18,7 +19,7 @@ const ModalComp = () => {
 
   const [visible, setVisible] = useState(false);
   const { data } = useQuery(AllData);
-
+  console.log(allData);
   const { data: filterCategory } = useQuery(Category, {
     variables: { category: allData.masterCategoryId },
   });
@@ -51,7 +52,7 @@ const ModalComp = () => {
   if (loading) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;
 
-  const onFinish = (e) => {
+  const onFinish = () => {
     addService({
       variables: {
         category_id: parseInt(allData.categoryId),
@@ -60,6 +61,9 @@ const ModalComp = () => {
         review: parseInt(allData.review),
         rating: parseInt(allData.rating),
         time: parseInt(allData.time),
+      },
+      update(cache, result) {
+        ///
       },
     });
   };
@@ -115,48 +119,18 @@ const ModalComp = () => {
                 ))}
             </Select>
           </Form.Item>
-
-          <Form.Item label="New Name">
-            <Input
-              type="text"
-              placeholder="Insert name"
-              onChange={(e) => setAllData({ ...allData, name: e.target.value })}
-            />
-          </Form.Item>
-          <Form.Item label="New Price">
-            <Input
-              type="number"
-              placeholder="Insert price"
-              onChange={(e) =>
-                setAllData({ ...allData, price: e.target.value })
-              }
-            />
-          </Form.Item>
-          <Form.Item label="New Review">
-            <Input
-              type="number"
-              placeholder="Insert review"
-              onChange={(e) =>
-                setAllData({ ...allData, review: e.target.value })
-              }
-            />
-          </Form.Item>
-          <Form.Item label="New Rating">
-            <Input
-              type="number"
-              placeholder="Insert rating"
-              onChange={(e) =>
-                setAllData({ ...allData, rating: e.target.value })
-              }
-            />
-          </Form.Item>
-          <Form.Item label="New Time">
-            <Input
-              type="number"
-              placeholder="Insert time"
-              onChange={(e) => setAllData({ ...allData, time: e.target.value })}
-            />
-          </Form.Item>
+          {dataInput.map((el, index) => (
+            <Form.Item key={index} label={el.label}>
+              <Input
+                type={el.type}
+                name={el.name}
+                placeholder={el.placeholder}
+                onChange={(e) =>
+                  setAllData({ ...allData, [e.target.name]: e.target.value })
+                }
+              />
+            </Form.Item>
+          ))}
         </Form>
       </Modal>
     </div>
