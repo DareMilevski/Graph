@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Form, Input, Button, Modal, Select } from "antd";
 import "../modal.css";
 import { Category, AllData, AddService } from "../query/query";
+import gql from "graphql-tag";
 
 const ModalComp = () => {
   const [allData, setAllData] = useState({
@@ -14,6 +15,7 @@ const ModalComp = () => {
     rating: "",
     time: "",
   });
+
   const [visible, setVisible] = useState(false);
   const { data } = useQuery(AllData);
 
@@ -21,13 +23,35 @@ const ModalComp = () => {
     variables: { category: allData.masterCategoryId },
   });
 
-  const [addService, { loading, error }] = useMutation(AddService);
+  const [addService, { loading, error }] = useMutation(AddService, {
+    update(cache, { data: { addService } }) {
+      cache.modify({
+        fields: {
+          todos(existingTodos = []) {
+            const newTodoRef = cache.writeFragment({
+              data: addService,
+              fragment: gql`
+                fragment NewSe on AddService {
+                  category_id
+                  name
+                  price
+                  rating
+                  review
+                  time
+                }
+              `,
+            });
+            return [...existingTodos, newTodoRef];
+          },
+        },
+      });
+    },
+  });
+
   if (loading) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;
 
   const onFinish = (e) => {
-    console.log(e, "va");
-    console.log(allData);
     addService({
       variables: {
         category_id: parseInt(allData.categoryId),
@@ -133,9 +157,6 @@ const ModalComp = () => {
               onChange={(e) => setAllData({ ...allData, time: e.target.value })}
             />
           </Form.Item>
-
-
-
         </Form>
       </Modal>
     </div>
