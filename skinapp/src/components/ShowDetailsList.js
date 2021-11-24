@@ -13,7 +13,8 @@ const ShowDetailsList = ({ items, setItems }) => {
 
   if (isPublic) return null;
 
-  const updateCache = (client) => {
+  const updateCache = (client, e) => {
+    console.log(client);
     const data = client.readQuery({
       query: AllData,
       variables: {
@@ -21,7 +22,7 @@ const ShowDetailsList = ({ items, setItems }) => {
       },
     });
     const newData = {
-      todos: data.todos.filter((t) => t.id !== client.id),
+      todos: data.todos.filter((t) => t.id !== e.id),
     };
     client.writeQuery({
       query: AllData,
@@ -68,7 +69,7 @@ const ShowDetailsList = ({ items, setItems }) => {
                 <div></div>
               </div>
             </div>
-            <Button onClick={(e) => remove(el, e)}>X</Button>
+            <Button onClick={(e) => remove(el, e)}>Remove Category</Button>
           </div>
         ))}
     </div>
