@@ -1,8 +1,46 @@
 import Subcategory from "./Subcategory";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import StarsIcons from "./StarsIcons";
+import { Button } from "antd";
+import { REMOVE_TODO, AllData } from "../query/query";
+import { useMutation } from "@apollo/client";
 
 const ShowDetailsList = ({ items, setItems }) => {
+  const [deleteTodo, { loading: deleting, error: deleteError }] =
+    useMutation(REMOVE_TODO);
+
+  let isPublic;
+
+  if (isPublic) return null;
+
+  const updateCache = (client) => {
+    const data = client.readQuery({
+      query: AllData,
+      variables: {
+        isPublic,
+      },
+    });
+    const newData = {
+      todos: data.todos.filter((t) => t.id !== client.id),
+    };
+    client.writeQuery({
+      query: AllData,
+      variables: {
+        isPublic,
+      },
+      data: newData,
+    });
+  };
+
+  const remove = (el, e) => {
+    console.log(el);
+    if (deleting) return;
+    deleteTodo({
+      variables: { id: el.id },
+      update: updateCache,
+    });
+  };
+
   return (
     <div className="detail">
       <Subcategory items={items} setItems={setItems} />
@@ -30,6 +68,7 @@ const ShowDetailsList = ({ items, setItems }) => {
                 <div></div>
               </div>
             </div>
+            <Button onClick={(e) => remove(el, e)}>X</Button>
           </div>
         ))}
     </div>

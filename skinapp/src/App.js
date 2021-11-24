@@ -34,7 +34,7 @@ const App = () => {
     <div className="App">
       <Navbar />
       <ModalComp originalData={originalData} subcategory={subcategory} />
-      <ItemList setData={setData} defaultItems={originalData} />
+      <ItemList setData={setData} defaultItems={originalData} setAllData={setOriginalData} />
       <div className="main">
         <SelectList data={dataArr} setItems={setItems} />
         <ShowDetailsList items={items} setItems={setItems} />
