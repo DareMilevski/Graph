@@ -26,9 +26,8 @@ const ItemList = ({ setData, defaultItems }) => {
     }
   }, [defaultItems]);
 
-  const handleOnClick = (category, index) => {
-    console.log(category);
-    setData(category);
+  const handleOnClick = (categories, index) => {
+    setData(categories);
     setActive(index);
   };
 
