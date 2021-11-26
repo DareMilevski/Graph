@@ -20,6 +20,7 @@ body {
 .item-list {
   display: flex;
   justify-content: space-between;
+  flex-wrap: nowrap;
   width: 70%;
   margin: 0 auto;
   margin-top: 30px;
@@ -28,12 +29,12 @@ body {
   padding: 30px;
   border-radius: 5px;
 }
-.item-list .inner {
+.item-list > .inner {
   background-color: white;
-  padding: 15px;
+  padding: 10px;
   background-color: white;
-  min-width: 120px;
-  max-height: 104px;
+  width: 100px;
+  height: 95px;
   border: 1px solid black;
   text-align: center;
   margin-right: 15px;
@@ -43,10 +44,10 @@ body {
 }
 .active {
   border: 1px solid lightblue;
-  padding: 15px;
+  padding: 10px;
   background-color: white;
-  min-width: 120px;
-  height: 104px;
+  width: 100px;
+  height: 95px;
   text-align: center;
   margin-right: 15px;
   align-items: center !important;
@@ -215,14 +216,24 @@ body {
     overflow-x: scroll;
     margin-bottom: 15px;
   }
+  .item-list .active {
+    margin-bottom: 10px;
+  }
+  .item-list .inner {
+    margin-bottom: 10px;
+  }
   .detail .showSubcategory {
     display: block !important;
   }
   .detail .showSubcategoryInner {
-    justify-content: start;
-    padding: 8px;
     font-size: 10px;
     line-height: 10px;
+    width: 100% !important;
+    height: 50px;
+    margin: 0 !important;
+    display: flex;
+    justify-content: space-between;
+    padding: 7px;
   }
   .main .select-menu {
     padding: 15px;
@@ -263,9 +274,13 @@ body {
     max-height: 45vh;
     min-height: 45vh;
   }
+  .ant-btn {
+    width: 100% !important;
+    font-size: 9px !important;
+  }
 }
 
-/* For mobile: */
+/* For tablet: */
 
 @media only screen and (max-width: 768px) {
   .item-list {
@@ -276,9 +291,11 @@ body {
   }
   .item-list .active {
     margin-bottom: 10px;
+    width: 100%;
   }
   .item-list .inner {
     margin-bottom: 10px;
+    width: 100%;
   }
   .ant-layout-footer {
     padding: 0 !important;
@@ -286,6 +303,7 @@ body {
   .detail .showSubcategoryInner {
     font-size: 12px;
     line-height: 16px;
+    margin-right: 10px;
   }
   .detail .subtitle {
     font-size: 15px;
@@ -295,5 +313,19 @@ body {
   }
   .main {
     margin-bottom: 10vh !important;
+  }
+}
+
+/* For pc: */
+
+@media only screen and (max-width: 1024px) {
+  .item-list .inner {
+    min-width: 72px !important;
+    font-size: 12px;
+  }
+  .showSubcategoryInner {
+    margin-right: 10px;
+    font-size: 15px;
+    line-height: 16px !important;
   }
 }

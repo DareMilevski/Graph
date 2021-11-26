@@ -1,15 +1,18 @@
+import { useQuery } from "@apollo/client";
 import { useState, useEffect } from "react";
+import { AllCategory } from "../query/query";
 
 const ItemList = ({ setData, defaultItems }) => {
   const [active, setActive] = useState(0);
   const [originalData, setOriginalData] = useState();
+  const { data: all } = useQuery(AllCategory);
 
   useEffect(() => {
     if (defaultItems) {
       setOriginalData([
         {
           active: true,
-          categories: defaultItems,
+          categories: all && all.data_categories,
           icon: "Spa",
           id: 0,
           name: "All",
@@ -26,9 +29,14 @@ const ItemList = ({ setData, defaultItems }) => {
     }
   }, [defaultItems]);
 
-  const handleOnClick = (categories, index) => {
-    setData(categories);
-    setActive(index);
+  const handleOnClick = (categories, index, name) => {
+    if (name === "All") {
+      setData(all.data_categories);
+      setActive(index);
+    } else {
+      setData(categories);
+      setActive(index);
+    }
   };
 
   return (
@@ -37,7 +45,7 @@ const ItemList = ({ setData, defaultItems }) => {
         originalData.map((el, index) => (
           <div
             key={index}
-            onClick={() => handleOnClick(el.categories, index)}
+            onClick={() => handleOnClick(el.categories, index, el.name)}
             className={active === index ? "active" : "inner"}
           >
             <div>

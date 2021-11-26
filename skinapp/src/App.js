@@ -30,6 +30,7 @@ const App = () => {
   const [dataArr, setData] = useState(category);
   const [items, setItems] = useState(subcategory);
 
+
   return (
     <div className="App">
       <Navbar />

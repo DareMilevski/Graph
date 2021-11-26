@@ -21,7 +21,7 @@ const Subcategory = ({ items, setItems }) => {
         }}
       >
         <MedicineBoxOutlined />
-        In clinic
+        <div>In clinic</div>
       </div>
       <div
         className="showSubcategoryInner"
@@ -30,7 +30,7 @@ const Subcategory = ({ items, setItems }) => {
         }}
       >
         <LaptopOutlined />
-        Virtual Consultation
+        <div>Virtual Consultation</div>
       </div>
     </div>
   );

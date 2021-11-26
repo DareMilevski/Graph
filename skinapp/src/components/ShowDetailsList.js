@@ -6,8 +6,7 @@ import { REMOVE_TODO, AllData } from "../query/query";
 import { useMutation } from "@apollo/client";
 
 const ShowDetailsList = ({ items, setItems }) => {
-  const [deleteTodo, { loading: deleting, error: deleteError }] =
-    useMutation(REMOVE_TODO);
+  const [deleteTodo, { loading: deleting }] = useMutation(REMOVE_TODO);
 
   let isPublic;
 
@@ -34,7 +33,7 @@ const ShowDetailsList = ({ items, setItems }) => {
   };
 
   const remove = (el, e) => {
-    console.log(el);
+    // console.log(el);
     if (deleting) return;
     deleteTodo({
       variables: { id: el.id },

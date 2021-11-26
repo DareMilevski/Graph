@@ -84,3 +84,24 @@ mutation deleteService($id: Int!) {
   delete_data_sub_categories_by_pk(id: $id){id}
 }
 `;
+
+
+export const AllCategory = gql`
+query MyQuery {
+  data_categories {
+    active
+    id
+    name
+    masterCatId
+    sub_categories {
+      category_id
+      id
+      name
+      price
+      rating
+      review
+      time
+    }
+  }
+}
+`;
